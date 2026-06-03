@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oncloud Developer Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+
+        <aside class="sidebar">
+            <div class="sidebar-logo">Oncloud</div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-cubes"></i> Projects</a></li>
+                <li><a href="#"><i class="fas fa-layer-group"></i> Integrations</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="sidebar-account" id="sidebarAccount">
+                <div class="account-avatar" id="accountAvatar">?</div>
+                <div class="account-info">
+                    <div class="account-name" id="accountName">Loading...</div>
+                    <div class="account-email" id="accountEmail"></div>
+                </div>
+                <div class="account-dropdown" id="accountDropdown">
+                    <div class="dropdown-header">
+                        <div class="dropdown-name" id="dropdownName"></div>
+                        <div class="dropdown-email" id="dropdownEmail"></div>
+                    </div>
+                    <a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Account settings</a>
+                    <a href="#" class="dropdown-item"><i class="fas fa-moon"></i> Theme</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item signout-item" id="signOutBtn"><i class="fas fa-sign-out-alt"></i> Sign out</a>
+                </div>
+            </div>
+        </aside>
+
+        <main class="dashboard-content">
+            
+            <div id="overviewGridView">
+                <h2>Overview</h2>
+                <div class="project-grid">
+                    <div class="create-card" id="triggerModalCard">
+                        <span>+ Create new project</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="projectDetailsView" style="display: none;">
+                <div class="project-view-header">
+                    <p class="breadcrumbs">PROJECT</p>
+                    <h1 id="display-project-name">test</h1>
+                </div>
+                
+                <div class="env-section">
+                    <h3>Production</h3>
+                    <div class="tabs">
+                        <span class="tab active">All (0)</span>
+                        <span class="tab">Services (0)</span>
+                        <span class="tab">Env Groups (0)</span>
+                    </div>
+                    
+                    <div id="dynamicWorkspaceContainer">
+                        
+                        <div id="emptyStateBox" class="empty-state-box">
+                            <h4>Production is empty</h4>
+                            <p>Kickstart your environment by creating a new service or by moving an existing one.</p>
+                            <div class="empty-actions">
+                                <button class="deploy-btn" id="emptyStateCreateBtn">+ Create new service</button>
+                                <button class="cancel-btn">Move existing services</button>
+                            </div>
+                        </div>
+
+                        <div id="serviceSelectionView" style="display: none;">
+                            <div class="wizard-step-title">
+                                <h2>Create a new <span style="border-bottom: 2px dashed #7c3aed;">Service</span></h2>
+                                <span class="skip-link" id="skipServiceBtn">Skip</span>
+                            </div>
+
+                            <div class="services-matrix">
+                                <div class="service-type-card" data-service="Static Sites">
+                                    <h3><i class="fas fa-laptop-code"></i> Static Sites</h3>
+                                    <p>Static content served over a global CDN. Ideal for frontend, blogs, and content sites.</p>
+                                    <span class="action-arrow">New Static Site →</span>
+                                </div>
+                                <div class="service-type-card" data-service="Web Services">
+                                    <h3><i class="fas fa-globe"></i> Web Services</h3>
+                                    <p>Dynamic web app. Ideal for full-stack apps, API servers, and mobile backends.</p>
+                                    <span class="action-arrow">New Web Service →</span>
+                                </div>
+                                <div class="service-type-card" data-service="Private Services">
+                                    <h3><i class="fas fa-lock"></i> Private Services</h3>
+                                    <p>Web app hosted on a private network, accessible only from your other services.</p>
+                                    <span class="action-arrow">New Private Service →</span>
+                                </div>
+                                <div class="service-type-card" data-service="Background Workers">
+                                    <h3><i class="fas fa-tasks"></i> Background Workers</h3>
+                                    <p>Long-lived services that process async tasks, usually from a job queue.</p>
+                                    <span class="action-arrow">New Worker →</span>
+                                </div>
+                                <div class="service-type-card" data-service="Cron Jobs">
+                                    <h3><i class="fas fa-clock"></i> Cron Jobs</h3>
+                                    <p>Short-lived tasks that run on a periodic schedule.</p>
+                                    <span class="action-arrow">New Cron Job →</span>
+                                </div>
+                                <div class="service-type-card" data-service="Postgres">
+                                    <h3><i class="fas fa-database"></i> Postgres</h3>
+                                    <p>Relational data storage. Supports point-in-time recovery, read replicas, and high availability.</p>
+                                    <span class="action-arrow">New Postgres →</span>
+                                </div>
+                                <div class="service-type-card" data-service="Key Value">
+                                    <h3><i class="fas fa-cubes"></i> Key Value</h3>
+                                    <p>Managed Redis®-compatible storage. Ideal for use as a shared cache, message broker, or job queue.</p>
+                                    <span class="action-arrow">New Key Value Instance →</span>
+                                </div>
+                                <div class="service-type-card" data-service="Workflow">
+                                    <h3><i class="fas fa-project-diagram"></i> Workflow <span class="beta-badge">Beta</span></h3>
+                                    <p>Run thousands of parallel tasks with zero ops overhead.</p>
+                                    <span class="action-arrow">New Workflow →</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="repoConnectionView" style="display: none;">
+                            <div class="back-nav" id="backToServices"><i class="fas fa-arrow-left"></i> Back to services</div>
+                            
+                            <div class="connect-split-layout">
+                                <div class="repo-list-panel">
+                                    <h3>Connect a Repository</h3>
+                                    <div class="repo-search-wrapper">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="repoSearchInput" placeholder="Search repositories...">
+                                    </div>
+                                    <div class="repo-items-list">
+                                        <div class="repo-item" data-repo="oncloud-platform">
+                                            <span><i class="fab fa-github"></i> shinobi / <strong>oncloud-platform</strong></span>
+                                            <button class="connect-item-btn">Connect</button>
+                                        </div>
+                                        <div class="repo-item" data-repo="portfolio-site">
+                                            <span><i class="fab fa-github"></i> shinobi / <strong>portfolio-site</strong></span>
+                                            <button class="connect-item-btn">Connect</button>
+                                        </div>
+                                        <div class="repo-item" data-repo="ecommerce-api">
+                                            <span><i class="fab fa-github"></i> shinobi / <strong>ecommerce-api</strong></span>
+                                            <button class="connect-item-btn">Connect</button>
+                                        </div>
+                                    </div>
+                                    <p class="public-repo-footer">Can't find your repository? <a href="#">Public Git repository URL</a></p>
+                                </div>
+
+                                <div class="git-connect-card">
+                                    <h3>Deployment Targets (<span id="selectedServiceType">Web Service</span>)</h3>
+                                    <p>Select your provider account to switch workspaces or configure manually below.</p>
+                                    
+                                    <form class="git-form" id="deploymentForm">
+                                        <label>Choose Provider</label>
+                                        <div class="git-provider-selector">
+                                            <label class="provider-radio">
+                                                <input type="radio" name="git-provider" value="GitHub" checked>
+                                                <span><i class="fab fa-github"></i> GitHub</span>
+                                            </label>
+                                            <label class="provider-radio">
+                                                <input type="radio" name="git-provider" value="GitLab">
+                                                <span><i class="fab fa-gitlab"></i> GitLab</span>
+                                            </label>
+                                            <label class="provider-radio">
+                                                <input type="radio" name="git-provider" value="Bitbucket">
+                                                <span><i class="fab fa-bitbucket"></i> Bitbucket</span>
+                                            </label>
+                                        </div>
+
+                                        <label for="repo-name">Repository Name</label>
+                                        <input type="text" id="repo-name" required placeholder="username/repository-name">
+                                        
+                                        <button type="submit" class="deploy-btn">Deploy Repository</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="create-card add-env-card" id="addEnvFooterCard">
+                        <span>+ Add environment</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Deploy Config View -->
+        <div id="deployConfigView" style="display:none;">
+            <div class="back-nav" id="backToRepo"><i class="fas fa-arrow-left"></i> Back</div>
+            <div class="wizard-stepper">
+                <span class="step done"><i class="fas fa-check"></i> Choose service</span>
+                <i class="fas fa-chevron-right step-arrow"></i>
+                <span class="step active">2 Configure</span>
+                <i class="fas fa-chevron-right step-arrow"></i>
+                <span class="step">3 Deploy</span>
+            </div>
+            <h2 class="config-title">Configure and deploy your new <span id="configServiceLabel">Web Service</span></h2>
+
+            <div class="config-form-layout">
+                <div class="config-left-label">
+                    <strong>Source Code</strong>
+                </div>
+                <div class="config-right-field">
+                    <div class="source-tabs">
+                        <span class="source-tab active">Git Provider</span>
+                        <span class="source-tab">Public Git Repository</span>
+                        <span class="source-tab">Existing Image</span>
+                    </div>
+                    <div id="gitProviderConnected" style="display:none;" class="connected-repo-row">
+                        <i class="fab fa-github"></i>
+                        <span id="connectedRepoLabel">shinobi/repo</span>
+                        <span class="repo-time">just now</span>
+                        <a href="#" class="edit-link">Edit</a>
+                    </div>
+                    <div id="gitProviderConnect" class="git-provider-connect-box">
+                        <h4>Connect Git provider</h4>
+                        <p>Connect your Git provider to deploy from your existing repositories.</p>
+                        <div class="provider-btn-row">
+                            <button class="provider-connect-btn" data-provider="GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#24292e"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                                GitHub
+                            </button>
+                            <button class="provider-connect-btn" data-provider="GitLab">
+                                <svg width="16" height="16" viewBox="0 0 24 24"><path d="M23.955 13.587l-1.342-4.135-2.664-8.189a.455.455 0 0 0-.867 0L16.418 9.45H7.582L4.918 1.263a.455.455 0 0 0-.867 0L1.386 9.45.044 13.587a.924.924 0 0 0 .331 1.023L12 23.054l11.625-8.443a.924.924 0 0 0 .33-1.024z" fill="#fc6d26"/></svg>
+                                GitLab
+                            </button>
+                            <button class="provider-connect-btn" data-provider="Bitbucket">
+                                <svg width="16" height="16" viewBox="0 0 24 24"><path d="M.778 1.213a.768.768 0 0 0-.768.892l3.263 19.81c.084.5.515.868 1.022.873H19.95a.772.772 0 0 0 .77-.646l3.27-20.03a.768.768 0 0 0-.768-.891L.778 1.213zM14.52 15.53H9.522L8.17 8.466h7.561l-1.211 7.064z" fill="#0052cc"/></svg>
+                                Bitbucket
+                            </button>
+                        </div>
+                    </div>
+                    <div id="repoSearchPanel" style="display:none;">
+                        <div class="repo-search-wrapper" style="margin-bottom:12px;">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="configRepoSearch" placeholder="Search repositories...">
+                        </div>
+                        <div class="config-repo-list">
+                            <div class="config-repo-row" data-repo="fadethedev99/netflics" data-time="7h ago"><i class="fab fa-github"></i> fadethedev99 / <strong>netflics</strong> <span class="repo-time">7h ago</span></div>
+                            <div class="config-repo-row" data-repo="fadethedev99/flick.js" data-time="7d ago"><i class="fab fa-github"></i> fadethedev99 / <strong>flick.js</strong> <span class="repo-time">7d ago</span></div>
+                            <div class="config-repo-row" data-repo="fadethedev99/ecommerce-api" data-time="8d ago"><i class="fab fa-github"></i> fadethedev99 / <strong>ecommerce-api</strong> <span class="repo-time">8d ago</span></div>
+                            <div class="config-repo-row" data-repo="fadethedev99/botify" data-time="21d ago"><i class="fab fa-github"></i> fadethedev99 / <strong>botify</strong> <span class="repo-time">21d ago</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-left-label"><strong>Name</strong><p>A unique name for your service.</p></div>
+                <div class="config-right-field"><input type="text" id="serviceNameInput" class="config-input" placeholder="my-web-service"></div>
+
+                <div class="config-left-label"><strong>Language</strong><p>Choose the runtime environment.</p></div>
+                <div class="config-right-field">
+                    <select class="config-input" id="languageSelect">
+                        <option>Node</option><option>Python</option><option>Ruby</option><option>Go</option><option>Rust</option><option>Docker</option>
+                    </select>
+                </div>
+
+                <div class="config-left-label"><strong>Branch</strong><p>The Git branch to build and deploy.</p></div>
+                <div class="config-right-field"><input type="text" id="branchInput" class="config-input" value="main"></div>
+
+                <div class="config-left-label"><strong>Region</strong><p>Services in the same region share a private network.</p></div>
+                <div class="config-right-field">
+                    <select class="config-input">
+                        <option>Oregon (US West)</option><option>Ohio (US East)</option><option>Frankfurt (EU)</option><option>Singapore (SE Asia)</option>
+                    </select>
+                </div>
+
+                <div class="config-left-label"><strong>Root Directory</strong><p>Optional</p></div>
+                <div class="config-right-field"><input type="text" class="config-input" placeholder="e.g. src"></div>
+
+                <div class="config-left-label"><strong>Build Command</strong><p>Runs before each deploy.</p></div>
+                <div class="config-right-field"><input type="text" id="buildCmd" class="config-input" value="yarn install"></div>
+
+                <div class="config-left-label"><strong>Start Command</strong><p>Runs to start your app.</p></div>
+                <div class="config-right-field"><input type="text" id="startCmd" class="config-input" value="node server.js"></div>
+            </div>
+
+            <!-- Instance Type -->
+            <div class="instance-section">
+                <h3>Instance Type</h3>
+                <div class="instance-grid">
+                    <div class="instance-group">
+                        <p class="instance-group-label">For hobby projects</p>
+                        <div class="instance-card" data-plan="Free">
+                            <div><strong>Free</strong><span class="plan-price">$0 / month</span></div>
+                            <div class="plan-specs">512 MB (RAM) &nbsp; 0.1 CPU</div>
+                        </div>
+                    </div>
+                    <div class="instance-group">
+                        <p class="instance-group-label">For professional use</p>
+                        <div class="instance-cards-row">
+                            <div class="instance-card selected" data-plan="Starter"><div><strong>Starter</strong><span class="plan-price">$7 / month</span></div><div class="plan-specs">512 MB &nbsp; 0.5 CPU</div></div>
+                            <div class="instance-card" data-plan="Standard"><div><strong>Standard</strong><span class="plan-price">$25 / month</span></div><div class="plan-specs">2 GB &nbsp; 1 CPU</div></div>
+                            <div class="instance-card" data-plan="Pro"><div><strong>Pro</strong><span class="plan-price">$85 / month</span></div><div class="plan-specs">4 GB &nbsp; 2 CPU</div></div>
+                            <div class="instance-card" data-plan="Pro Plus"><div><strong>Pro Plus</strong><span class="plan-price">$175 / month</span></div><div class="plan-specs">8 GB &nbsp; 4 CPU</div></div>
+                            <div class="instance-card" data-plan="Pro Max"><div><strong>Pro Max</strong><span class="plan-price">$225 / month</span></div><div class="plan-specs">16 GB &nbsp; 4 CPU</div></div>
+                            <div class="instance-card" data-plan="Pro Ultra"><div><strong>Pro Ultra</strong><span class="plan-price">$450 / month</span></div><div class="plan-specs">32 GB &nbsp; 8 CPU</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Env Vars -->
+            <div class="env-vars-section">
+                <h3>Environment Variables</h3>
+                <p>Set environment-specific config and secrets (such as API keys).</p>
+                <div id="envVarRows">
+                    <div class="env-var-row">
+                        <input type="text" class="config-input env-key" placeholder="NAME_OF_VARIABLE">
+                        <input type="text" class="config-input env-val" placeholder="value">
+                        <button class="env-delete-btn"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                <div class="env-var-actions">
+                    <button class="cancel-btn" id="addEnvVarBtn">+ Add Environment Variable</button>
+                    <button class="cancel-btn">Add from .env</button>
+                </div>
+            </div>
+
+            <button class="deploy-btn" id="finalDeployBtn" style="margin-top:32px; padding:14px 32px; font-size:15px;">Deploy Web Service</button>
+        </div>
+
+        <!-- Deploy Logs View -->
+        <div id="deployLogsView" style="display:none;">
+            <div class="wizard-stepper">
+                <span class="step done"><i class="fas fa-check"></i> Choose service</span>
+                <i class="fas fa-chevron-right step-arrow"></i>
+                <span class="step done"><i class="fas fa-check"></i> Configure</span>
+                <i class="fas fa-chevron-right step-arrow"></i>
+                <span class="step active">3 Deploy</span>
+            </div>
+            <div class="deploy-logs-header">
+                <div>
+                    <h2 id="logsServiceName">my-web-service</h2>
+                    <a id="liveServiceUrl" href="#" target="_blank" class="live-url-link"></a>
+                </div>
+                <span class="deploy-status-badge" id="deployStatusBadge">In progress...</span>
+            </div>
+            <div class="logs-box" id="logsBox"></div>
+        </div>
+
+        <div id="projectModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create a project</h2>
+                    <button type="button" id="closeModalBtn" class="close-x">&times;</button>
+                </div>
+                <p class="modal-subtitle"><span>Projects</span> organize your services to make app development easier.</p>
+                
+                <form id="createProjectForm">
+                    <label for="new-project-name">Project name</label>
+                    <input type="text" id="new-project-name" required placeholder="e.g., my-awesome-app">
+
+                    <label for="env-name">Environment name</label>
+                    <input type="text" id="env-name" value="Production">
+                    
+                    <div class="modal-actions">
+                        <button type="submit" class="deploy-btn" style="background-color: #7c3aed;">Create project</button>
+                        <button type="button" id="cancelModalBtn" class="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCyi3ioxk8rhvtadngX8cXgCDMkWB3BClY",
+            authDomain: "oncloud-f6f30.firebaseapp.com",
+            projectId: "oncloud-f6f30",
+            storageBucket: "oncloud-f6f30.firebasestorage.app",
+            messagingSenderId: "1051051244925",
+            appId: "1:1051051244925:web:45f70f5f7272bf54a56014"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        let currentUser = null;
+
+        auth.onAuthStateChanged(async user => {
+            if (!user) {
+                window.location.href = "index.html";
+                return;
+            }
+            currentUser = user;
+
+            const name = user.displayName || user.email.split('@')[0];
+            const email = user.email;
+            const initial = name.charAt(0).toUpperCase();
+
+            document.getElementById('accountAvatar').textContent = initial;
+            document.getElementById('accountName').textContent = name;
+            document.getElementById('accountEmail').textContent = email;
+            document.getElementById('dropdownName').textContent = name;
+            document.getElementById('dropdownEmail').textContent = email;
+
+            await loadProjects();
+        });
+
+        document.getElementById('sidebarAccount').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('accountDropdown').classList.toggle('open');
+        });
+        document.addEventListener('click', () => {
+            document.getElementById('accountDropdown').classList.remove('open');
+        });
+
+        document.getElementById('signOutBtn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            await auth.signOut();
+            window.location.href = "index.html";
+        });
+
+        async function loadProjects() {
+            const snapshot = await db.collection('projects')
+                .where('uid', '==', currentUser.uid)
+                .orderBy('createdAt', 'desc')
+                .get();
+
+            const grid = document.querySelector('.project-grid');
+            grid.querySelectorAll('.project-card').forEach(c => c.remove());
+
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="project-card-name">${data.name}</div>
+                    <div class="project-card-env">${data.env || 'Production'}</div>
+                `;
+                card.addEventListener('click', () => {
+                    document.getElementById('display-project-name').textContent = data.name;
+                    overviewGridView.style.display = 'none';
+                    projectDetailsView.style.display = 'block';
+                });
+                grid.insertBefore(card, document.getElementById('triggerModalCard'));
+            });
+        }
+
+        async function saveProject(name, env) {
+            await db.collection('projects').add({
+                uid: currentUser.uid,
+                name: name,
+                env: env,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+
+        const triggerModalCard = document.getElementById('triggerModalCard');
+        const modal = document.getElementById('projectModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelModalBtn = document.getElementById('cancelModalBtn');
+        const createProjectForm = document.getElementById('createProjectForm');
+        
+        const overviewGridView = document.getElementById('overviewGridView');
+        const projectDetailsView = document.getElementById('projectDetailsView');
+        const displayProjectName = document.getElementById('display-project-name');
+
+        const emptyStateBox = document.getElementById('emptyStateBox');
+        const serviceSelectionView = document.getElementById('serviceSelectionView');
+        const repoConnectionView = document.getElementById('repoConnectionView');
+        const selectedServiceType = document.getElementById('selectedServiceType');
+        
+        const emptyStateCreateBtn = document.getElementById('emptyStateCreateBtn');
+        const skipServiceBtn = document.getElementById('skipServiceBtn');
+        const backToServices = document.getElementById('backToServices');
+        const deploymentForm = document.getElementById('deploymentForm');
+        const repoNameInput = document.getElementById('repo-name');
+
+        triggerModalCard.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        const hideModal = () => { modal.style.display = 'none'; };
+        closeModalBtn.addEventListener('click', hideModal);
+        cancelModalBtn.addEventListener('click', hideModal);
+
+        createProjectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const projectNameInput = document.getElementById('new-project-name').value;
+            const envName = document.getElementById('env-name').value || 'Production';
+            displayProjectName.textContent = projectNameInput;
+
+            await saveProject(projectNameInput, envName);
+            await loadProjects();
+
+            hideModal();
+            overviewGridView.style.display = 'none';
+            projectDetailsView.style.display = 'block';
+        });
+
+        emptyStateCreateBtn.addEventListener('click', () => {
+            emptyStateBox.style.display = 'none';
+            serviceSelectionView.style.display = 'block';
+        });
+
+        document.querySelectorAll('.service-type-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const choice = card.getAttribute('data-service');
+                selectedServiceType.textContent = choice;
+                serviceSelectionView.style.display = 'none';
+                repoConnectionView.style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.repo-item').forEach(item => {
+            item.querySelector('.connect-item-btn').addEventListener('click', () => {
+                const repoSlug = item.getAttribute('data-repo');
+                repoNameInput.value = `shinobi/${repoSlug}`;
+            });
+        });
+
+        backToServices.addEventListener('click', () => {
+            repoConnectionView.style.display = 'none';
+            serviceSelectionView.style.display = 'block';
+        });
+
+        document.querySelectorAll('.service-type-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const choice = card.getAttribute('data-service');
+                selectedServiceType.textContent = choice;
+                document.getElementById('configServiceLabel').textContent = choice;
+                serviceSelectionView.style.display = 'none';
+                document.getElementById('deployConfigView').style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.provider-connect-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const provider = btn.getAttribute('data-provider');
+                document.getElementById('gitProviderConnect').style.display = 'none';
+                document.getElementById('repoSearchPanel').style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.config-repo-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const repo = row.getAttribute('data-repo');
+                const time = row.getAttribute('data-time');
+                document.getElementById('repoSearchPanel').style.display = 'none';
+                document.getElementById('gitProviderConnected').style.display = 'flex';
+                document.getElementById('connectedRepoLabel').textContent = repo;
+                document.getElementById('serviceNameInput').value = repo.split('/')[1] || repo;
+            });
+        });
+
+        document.querySelectorAll('.instance-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.instance-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+            });
+        });
+
+        document.getElementById('addEnvVarBtn').addEventListener('click', () => {
+            const row = document.createElement('div');
+            row.className = 'env-var-row';
+            row.innerHTML = `<input type="text" class="config-input env-key" placeholder="NAME_OF_VARIABLE"><input type="text" class="config-input env-val" placeholder="value"><button class="env-delete-btn"><i class="fas fa-trash"></i></button>`;
+            row.querySelector('.env-delete-btn').addEventListener('click', () => row.remove());
+            document.getElementById('envVarRows').appendChild(row);
+        });
+
+        document.getElementById('envVarRows').querySelector('.env-delete-btn').addEventListener('click', function() {
+            this.closest('.env-var-row').remove();
+        });
+
+        document.getElementById('backToRepo').addEventListener('click', () => {
+            document.getElementById('deployConfigView').style.display = 'none';
+            repoConnectionView.style.display = 'block';
+            document.getElementById('gitProviderConnect').style.display = 'block';
+            document.getElementById('repoSearchPanel').style.display = 'none';
+            document.getElementById('gitProviderConnected').style.display = 'none';
+        });
+
+        document.getElementById('finalDeployBtn').addEventListener('click', () => {
+            const name = document.getElementById('serviceNameInput').value || 'my-web-service';
+            const slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            const domain = `${slug}.oncloud.app`;
+
+            document.getElementById('logsServiceName').textContent = name;
+            const urlEl = document.getElementById('liveServiceUrl');
+            urlEl.textContent = domain;
+            urlEl.href = `https://${domain}`;
+
+            document.getElementById('deployConfigView').style.display = 'none';
+            document.getElementById('deployLogsView').style.display = 'block';
+
+            const lines = [
+                '==> Cloning from ' + (document.getElementById('connectedRepoLabel').textContent || 'repo') + '...',
+                '==> Checking out branch: ' + (document.getElementById('branchInput').value || 'main'),
+                '==> Running build command: ' + (document.getElementById('buildCmd').value || 'yarn install'),
+                'yarn install v1.22.19',
+                '[1/4] Resolving packages...',
+                '[2/4] Fetching packages...',
+                '[3/4] Linking dependencies...',
+                '[4/4] Building fresh packages...',
+                'Done in 4.21s.',
+                '==> Running start command: ' + (document.getElementById('startCmd').value || 'node server.js'),
+                '==> Server listening on port 10000',
+                `==> Your service is live at https://${domain}`,
+            ];
+
+            const logsBox = document.getElementById('logsBox');
+            logsBox.innerHTML = '';
+            let i = 0;
+            const badge = document.getElementById('deployStatusBadge');
+            const interval = setInterval(() => {
+                if (i < lines.length) {
+                    const line = document.createElement('div');
+                    line.className = 'log-line';
+                    line.textContent = lines[i];
+                    logsBox.appendChild(line);
+                    logsBox.scrollTop = logsBox.scrollHeight;
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    badge.textContent = 'Live';
+                    badge.classList.add('live');
+                }
+            }, 600);
+        });
+
+        skipServiceBtn.addEventListener('click', () => {
+            serviceSelectionView.style.display = 'none';
+            emptyStateBox.style.display = 'block';
+        });
+
+        deploymentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const chosenProvider = document.querySelector('input[name="git-provider"]:checked').value;
+            const repoName = repoNameInput.value.trim();
+            
+            alert(`Pipeline created successfully!\nService: ${selectedServiceType.textContent}\nProvider: ${chosenProvider}\nTarget: ${repoName}`);
+            
+            repoConnectionView.style.display = 'none';
+            emptyStateBox.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

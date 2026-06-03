@@ -1,0 +1,1101 @@
+.render-landing {
+    background-color: #f8fafc;
+    color: #0f172a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.top-banner {
+    background-color: #0f172a;
+    color: #f1f5f9;
+    font-size: 13px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.top-banner a {
+    color: #a78bfa;
+    text-decoration: none;
+    margin-left: 8px;
+    font-weight: 600;
+}
+
+
+.render-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 80px;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.render-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+}
+
+.render-logo i {
+    color: #7c3aed; 
+}
+
+.render-nav-links {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.render-nav-links a, .render-login-btn {
+    text-decoration: none;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.render-nav-links a:hover, .render-login-btn:hover {
+    color: #0f172a;
+}
+
+
+.render-cta-btn {
+    background-color: #0f172a;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+
+.render-hero {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.hero-left .badge {
+    background-color: #ede9fe;
+    color: #6d28d9;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.hero-left h1 {
+    font-size: 54px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin: 24px 0 16px 0;
+    color: #0f172a;
+}
+
+#typing-text {
+    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+
+.cursor {
+    color: #7c3aed;
+    font-weight: 400;
+    margin-left: 2px;
+    animation: blink 0.8s infinite;
+}
+
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.hero-left p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 36px;
+}
+
+/* Action Button Grid Layout */
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-purple {
+    background-color: #7c3aed;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+}
+
+.btn-purple:hover {
+    background-color: #6d28d9;
+}
+
+.btn-outline {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-outline:hover {
+    background-color: #f8fafc;
+    border-color: #94a3b8;
+}
+
+/* Right Column Window Preview Graphic */
+.preview-browser-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1);
+    overflow: hidden;
+}
+
+.browser-header {
+    background-color: #f8fafc;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.dot.red { background-color: #ef4444; }
+.dot.yellow { background-color: #f59e0b; }
+.dot.green { background-color: #10b981; }
+
+.browser-title {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: monospace;
+}
+
+.browser-body {
+    padding: 32px;
+    background-color: #ffffff;
+}
+
+.mini-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mini-card i {
+    font-size: 24px;
+    color: #0f172a;
+}
+
+.mini-card strong {
+    display: block;
+    font-size: 14px;
+    color: #0f172a;
+}
+
+.mini-card p {
+    margin: 2px 0 0 0;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.status-tag {
+    margin-left: auto;
+    background-color: #dcfce7;
+    color: #15803d;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh; 
+    background-color: #f9fafb; 
+}
+
+.sidebar {
+    width: 240px;
+    background-color: #ffffff;
+    border-right: 1px solid #e5e7eb; 
+    padding: 24px;
+}
+
+.sidebar-logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0f172a; 
+}
+
+.sidebar-menu {
+    list-style: none; 
+    padding: 0;
+    margin-top: 40px;
+}
+
+.sidebar-menu li {
+    margin-bottom: 16px;
+}
+
+.sidebar-menu a {
+    text-decoration: none; 
+    color: #475569; 
+    font-size: 16px;
+    display: block;
+}
+
+.sidebar-menu a.active {
+    color: #7c3aed; 
+    font-weight: bold;
+}
+
+
+.dashboard-content {
+    flex: 1; 
+    padding: 40px; 
+}
+
+.dashboard-content h2, .project-view-header h1 {
+    color: #0f172a; 
+    margin: 0 0 24px 0;
+    font-size: 28px;
+}
+
+.breadcrumbs {
+    font-size: 11px;
+    font-weight: bold;
+    color: #64748b;
+    margin: 0 0 4px 0;
+}
+
+
+.project-grid {
+    display: flex;
+    gap: 20px; 
+    align-items: flex-start; 
+}
+
+.git-connect-card, .create-card, .empty-state-box {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 24px;
+    width: 350px; 
+    box-sizing: border-box;
+    color: #0f172a;
+}
+
+.create-card {
+    border: 1px dashed #cbd5e1;
+    height: 100px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.env-section h3 {
+    color: #334155;
+    margin-bottom: 12px;
+}
+
+.tabs {
+    display: flex;
+    gap: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+}
+
+.tab {
+    color: #64748b;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.tab.active {
+    color: #7c3aed;
+    font-weight: bold;
+}
+
+.empty-state-box {
+    width: 100%;
+    max-width: 720px;
+    text-align: center;
+    padding: 48px;
+    margin-bottom: 20px;
+}
+
+.empty-state-box h4 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+}
+
+.empty-state-box p {
+    color: #64748b;
+    margin: 0 0 24px 0;
+}
+
+.empty-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.add-env-card {
+    width: 100%;
+    max-width: 720px;
+}
+
+
+.git-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+}
+
+.git-form label, #projectModal label {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #64748b; 
+    margin-bottom: 6px;
+    display: block;
+}
+
+.git-form input, .git-form select, #projectModal input {
+    padding: 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    margin-bottom: 16px; 
+    font-size: 14px;
+    background-color: #fff;
+    color: #0f172a; 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.deploy-btn {
+    background-color: #0f172a; 
+    color: white;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.deploy-btn:hover {
+    background-color: #1e293b; 
+}
+
+.cancel-btn {
+    background: none;
+    border: 1px solid #e5e7eb;
+    padding: 12px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.3); 
+    backdrop-filter: blur(2px); 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 32px;
+    border-radius: 8px;
+    width: 500px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.close-x {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.modal-subtitle {
+    color: #64748b;
+    margin: 0 0 24px 0;
+    font-size: 14px;
+}
+
+.modal-subtitle span {
+    color: #7c3aed; 
+    font-weight: 600;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+
+
+.auth-page {
+    background-color: #ffffff; 
+    color: #0f172a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 500px; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.auth-container h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 32px;
+}
+
+
+.oauth-grid {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.oauth-btn {
+    flex: 1;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    text-align: center;
+}
+
+.oauth-btn:hover {
+    background-color: #f8fafc;
+    border-color: #94a3b8;
+}
+
+
+.auth-divider {
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.auth-form input {
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    background-color: #ffffff;
+    color: #0f172a;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.auth-form input:focus {
+    border-color: #7c3aed; 
+    outline: none;
+}
+
+
+.submit-auth-btn {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: fit-content; 
+    min-width: 80px;
+    margin-bottom: 32px;
+}
+
+.submit-auth-btn:hover {
+    background-color: #1e293b;
+}
+
+.submit-auth-btn:disabled {
+    background-color: #475569;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+.auth-footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.auth-footer-links p {
+    margin: 0;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.auth-footer-links a {
+    color: #7c3aed; 
+    text-decoration: none;
+}
+
+.auth-footer-links a:hover {
+    text-decoration: underline;
+}
+
+
+.brand-logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.nav-links a {
+    color: #cbd5e1; 
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+}
+
+
+.nav-links .nav-btn {
+    background-color: #ffffff; 
+    color: #0f172a; 
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.nav-links .nav-btn:hover {
+    background-color: #f1f5f9; 
+    color: #0f172a;
+}
+
+.oauth-btn i {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+
+.auth-error-box {
+    background-color: #fef2f2;
+    border: 1px solid #fca5a5;
+    color: #b91c1c;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* Service Selection View layout grid configuration */
+.services-matrix {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.service-type-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.service-type-card:hover {
+    border-color: #7c3aed;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.08);
+}
+
+/* Custom Horizontal Radio Selector styling for providers */
+.git-provider-selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.provider-radio input {
+    display: none;
+}
+
+.provider-radio span {
+    display: block;
+    padding: 10px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.provider-radio input:checked + span {
+    border-color: #7c3aed;
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+.beta-badge {
+    font-size: 0.7rem;
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+}
+
+
+/* ==========================================================================
+   Two-Column Service & Repository Deployment Wizard Layout
+   ========================================================================== */
+
+/* Split Container Layout */
+.connect-split-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+    align-items: start;
+}
+
+/* Back Button Component */
+.back-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: color 0.15s ease;
+}
+
+.back-nav:hover {
+    color: #7c3aed;
+}
+
+/* Left Panel: Repository Selection List */
+.repo-list-panel {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.repo-list-panel h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+/* Inline Input Search Field styling */
+.repo-search-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.repo-search-wrapper i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.repo-search-wrapper input {
+    width: 100%;
+    padding: 11px 12px 11px 40px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #0f172a;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.repo-search-wrapper input:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    outline: none;
+}
+
+/* Individual Repository List Container */
+.repo-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Rows for Repository Items */
+.repo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border: 1px solid #f1f5f9;
+    border-radius: 6px;
+    background-color: #f8fafc;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.repo-item:hover {
+    background-color: #f1f5f9;
+    border-color: #e2e8f0;
+}
+
+.repo-item span {
+    font-size: 14px;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.repo-item span i {
+    color: #475569;
+    font-size: 16px;
+}
+
+.repo-item strong {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+/* Small contextual actions inside repo lists */
+.connect-item-btn {
+    background-color: #7c3aed;
+    color: #ffffff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.connect-item-btn:hover {
+    background-color: #6d28d9;
+}
+
+/* Footer context descriptions */
+.public-repo-footer {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #64748b;
+    text-align: left;
+}
+
+.public-repo-footer a {
+    color: #7c3aed;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.public-repo-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Right Panel Layout Fix overrides */
+#repoConnectionView .git-connect-card {
+    width: 100%; /* Spans evenly inside the 1fr column grid template setup */
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+#repoConnectionView .git-connect-card h3 {
+    margin: 0 0 6px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#repoConnectionView .git-connect-card p {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+}
+
+/* Header context steps styling */
+.wizard-step-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.wizard-step-title h2 {
+    font-size: 22px !important;
+    margin: 0 !important;
+}
+
+.skip-link {
+    font-size: 14px;
+    color: #64748b;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+
+.skip-link:hover {
+    color: #0f172a;
+}
+
+.sidebar-account {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    width: 240px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border-top: 1px solid #f1f5f9;
+    box-sizing: border-box;
+}
+
+.account-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #7c3aed;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.account-info {
+    overflow: hidden;
+}
+
+.account-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.account-email {
+    font-size: 11px;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.account-dropdown {
+    display: none;
+    position: absolute;
+    bottom: 64px;
+    left: 16px;
+    width: 220px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    z-index: 100;
+    overflow: hidden;
+}
+
+.account-dropdown.open {
+    display: block;
+}
+
+.dropdown-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.dropdown-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.dropdown-email {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #334155;
+    text-decoration: none;
+    transition: background 0.1s;
+}
+
+.dropdown-item:hover {
+    background: #f8fafc;
+}
+
+.dropdown-divider {
+    border-top: 1px solid #f1f5f9;
+    margin: 4px 0;
+}
+
+.signout-item {
+    color: #ef4444;
+}
+
+.signout-item:hover {
+    background: #fef2f2;
+}
+
+.project-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px 24px;
+    width: 280px;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.project-card:hover {
+    border-color: #7c3aed;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.08);
+}
+
+.project-card-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 6px;
+}
+
+.project-card-env {
+    font-size: 12px;
+    color: #64748b;
+}

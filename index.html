@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Application Hosting Platform · Oncloud</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="render-landing">
+
+    <div class="top-banner">
+        <span>Oncloud is the easiest way to deploy your apps.</span>
+        <a href="login.html">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <nav class="render-nav">
+        <div class="nav-left">
+            <a href="#" class="render-logo">
+                <i class="fa-solid fa-cloud"></i>
+                <span>oncloud</span>
+            </a>
+            <ul class="render-nav-links">
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Documentation</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <a href="login.html" class="render-cta-btn">Start your journey</a>
+        </div>
+    </nav>
+
+    <header class="render-hero">
+        <div class="hero-left">
+            <h1>The ultimate developer platform for... <br><span id="typing-text"></span><span class="cursor">|</span></h1></h1>
+            <p>Ever wanted to deploy a website, host bots and servers? Now you can with our easy-to-use platform that handles your build pipelines automatically.</p>
+            
+            <div class="hero-buttons">
+                <a href="login.html" class="btn-purple">Deploy to Oncloud</a>
+                <a href="#" class="btn-outline"><i class="fa-solid fa-play"></i> View Sandbox</a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="preview-browser-box">
+                <div class="browser-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="browser-title">dashboard.oncloud.com</span>
+                </div>
+                <div class="browser-body">
+                    <div class="mini-card">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <strong>my-awesome-app</strong>
+                            <p>main @ 7d2f4a1  Success</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<script>
+    
+    const words = ["APIs", "Web Apps", "Discord Bots", "Build Pipelines", " Servers coming soon"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    const typingTarget = document.getElementById("typing-text");
+
+    function typeEffect() {
+        const currentWord = words[wordIndex];
+        
+        if (isDeleting) {
+            
+            typingTarget.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            
+            typingTarget.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        // Typing Speed Adjustments
+        let typeSpeed = isDeleting ? 40 : 80; 
+
+        
+        if (!isDeleting && charIndex === currentWord.length) {
+            typeSpeed = 1500; 
+            isDeleting = true;
+        } 
+
+        else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length; 
+            typeSpeed = 400; 
+        }
+
+        setTimeout(typeEffect, typeSpeed);
+    }
+
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(typeEffect, 500);
+    });
+</script>
+
+
+
+
+
+</body>
+</html>

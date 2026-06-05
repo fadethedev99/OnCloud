@@ -53,7 +53,7 @@
 
             <div id="projectDetailsView" style="display: none;">
                 <div class="project-view-header">
-                    <p class="breadcrumbs">PROJECT</p>
+                    <p class="breadcrumbs"><a href="#" id="breadcrumbBack" style="text-decoration:none;color:inherit;">← Projects</a> / PROJECT</p>
                     <h1 id="display-project-name">test</h1>
                 </div>
                 
@@ -191,9 +191,6 @@
                 </div>
             </div>
 
-        </main>
-
-        <!-- Deploy Config View -->
         <div id="deployConfigView" style="display:none;">
             <div class="back-nav" id="backToRepo"><i class="fas fa-arrow-left"></i> Back</div>
             <div class="wizard-stepper">
@@ -345,7 +342,9 @@
                 <span class="deploy-status-badge" id="deployStatusBadge">In progress...</span>
             </div>
             <div class="logs-box" id="logsBox"></div>
-        </div>
+            </div>
+
+        </main>
 
         <div id="projectModal" class="modal-overlay">
             <div class="modal-content">
@@ -500,18 +499,15 @@
             projectDetailsView.style.display = 'block';
         });
 
+        document.getElementById('breadcrumbBack').addEventListener('click', (e) => {
+            e.preventDefault();
+            projectDetailsView.style.display = 'none';
+            overviewGridView.style.display = 'block';
+        });
+
         emptyStateCreateBtn.addEventListener('click', () => {
             emptyStateBox.style.display = 'none';
             serviceSelectionView.style.display = 'block';
-        });
-
-        document.querySelectorAll('.service-type-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const choice = card.getAttribute('data-service');
-                selectedServiceType.textContent = choice;
-                serviceSelectionView.style.display = 'none';
-                repoConnectionView.style.display = 'block';
-            });
         });
 
         document.querySelectorAll('.repo-item').forEach(item => {
@@ -648,19 +644,7 @@
     </script>
 
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
-    const firebaseConfig = {
-        apiKey: "AIzaSyCyi3ioxk8rhvtadngX8cXgCDMkWB3BClY",
-        authDomain: "oncloud-f6f30.firebaseapp.com",
-        projectId: "oncloud-f6f30",
-        storageBucket: "oncloud-f6f30.firebasestorage.app",
-        messagingSenderId: "1051051244925",
-        appId: "1:1051051244925:web:45f70f5f7272bf54a56014"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
     const urlParams = new URLSearchParams(window.location.search);
     const serverToken = urlParams.get('token');
 
@@ -672,15 +656,6 @@
             })
             .catch(err => console.error("Session token activation failed:", err));
     }
-
-    
-    auth.onAuthStateChanged(user => {
-        if (!user && !serverToken) {
-            window.location.href = "index.html";
-        }
-    });
 </script>
-
-
 </body>
 </html>

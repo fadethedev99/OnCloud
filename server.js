@@ -72,7 +72,6 @@ app.get('/api/auth/github/callback', async (req, res) => {
             username: githubUser.login,
             displayName: githubUser.name || githubUser.login,
             avatarUrl: githubUser.avatar_url,
-            githubToken: accessToken, 
             lastLogin: new Date().toISOString()
         };
 

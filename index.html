@@ -69,10 +69,11 @@
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    
-    const typingTarget = document.getElementById("typing-text");
+    let typingTarget;
 
     function typeEffect() {
+        if (!typingTarget) typingTarget = document.getElementById("typing-text");
+        if (!typingTarget) return;
         const currentWord = words[wordIndex];
         
         if (isDeleting) {

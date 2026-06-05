@@ -35,6 +35,8 @@
     border-bottom: 1px solid #e2e8f0;
     position: sticky;
     top: 0;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .nav-left, .nav-right {
@@ -98,6 +100,76 @@
     grid-template-columns: 1.2fr 1fr;
     gap: 60px;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .render-nav {
+        padding: 16px 20px;
+    }
+    .render-nav-links {
+        display: none;
+    }
+    .render-hero {
+        grid-template-columns: 1fr;
+        margin: 40px auto;
+        padding: 0 20px;
+        gap: 32px;
+    }
+    .hero-left h1 {
+        font-size: 34px;
+    }
+    .hero-buttons {
+        flex-direction: column;
+    }
+    .dashboard-wrapper {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 16px 20px;
+    }
+    .sidebar-menu {
+        display: flex;
+        gap: 16px;
+        margin-top: 12px;
+    }
+    .sidebar-menu li {
+        margin-bottom: 0;
+    }
+    .sidebar-account {
+        position: static;
+        width: 100%;
+        padding: 12px 0 0 0;
+        border-top: 1px solid #f1f5f9;
+        margin-top: 12px;
+    }
+    .dashboard-content {
+        padding: 20px;
+    }
+    .connect-split-layout {
+        grid-template-columns: 1fr;
+    }
+    .services-matrix {
+        grid-template-columns: 1fr;
+    }
+    .modal-content {
+        width: 90vw;
+        padding: 20px;
+    }
+    .project-grid {
+        flex-direction: column;
+    }
+    .project-card, .create-card {
+        width: 100%;
+    }
+    .instance-cards-row {
+        flex-wrap: wrap;
+    }
+    .config-form-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
 .hero-left .badge {
@@ -748,6 +820,20 @@
     border-color: #7c3aed;
     background: #f3e8ff;
     color: #7c3aed;
+}
+
+.config-form-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px 32px;
+    align-items: start;
+    margin-bottom: 32px;
+}
+
+.instance-cards-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .beta-badge {

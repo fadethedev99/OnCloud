@@ -147,7 +147,7 @@
     margin-bottom: 36px;
 }
 
-/* Action Button Grid Layout */
+
 .hero-buttons {
     display: flex;
     gap: 16px;
@@ -182,7 +182,7 @@
     border-color: #94a3b8;
 }
 
-/* Right Column Window Preview Graphic */
+
 .preview-browser-box {
     background: #ffffff;
     border: 1px solid #e2e8f0;
@@ -703,7 +703,7 @@
     font-weight: 500;
 }
 
-/* Service Selection View layout grid configuration */
+
 .services-matrix {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -725,7 +725,7 @@
     box-shadow: 0 4px 12px rgba(124, 58, 237, 0.08);
 }
 
-/* Custom Horizontal Radio Selector styling for providers */
+
 .git-provider-selector {
     display: flex;
     gap: 12px;
@@ -760,11 +760,6 @@
 }
 
 
-/* ==========================================================================
-   Two-Column Service & Repository Deployment Wizard Layout
-   ========================================================================== */
-
-/* Split Container Layout */
 .connect-split-layout {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -773,7 +768,7 @@
     align-items: start;
 }
 
-/* Back Button Component */
+
 .back-nav {
     display: inline-flex;
     align-items: center;
@@ -790,7 +785,7 @@
     color: #7c3aed;
 }
 
-/* Left Panel: Repository Selection List */
+
 .repo-list-panel {
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -806,7 +801,7 @@
     font-weight: 600;
 }
 
-/* Inline Input Search Field styling */
+
 .repo-search-wrapper {
     position: relative;
     margin-bottom: 20px;
@@ -839,14 +834,14 @@
     outline: none;
 }
 
-/* Individual Repository List Container */
+
 .repo-items-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/* Rows for Repository Items */
+
 .repo-item {
     display: flex;
     justify-content: space-between;
@@ -881,7 +876,7 @@
     font-weight: 600;
 }
 
-/* Small contextual actions inside repo lists */
+
 .connect-item-btn {
     background-color: #7c3aed;
     color: #ffffff;
@@ -898,7 +893,7 @@
     background-color: #6d28d9;
 }
 
-/* Footer context descriptions */
+
 .public-repo-footer {
     margin-top: 20px;
     font-size: 13px;
@@ -916,9 +911,9 @@
     text-decoration: underline;
 }
 
-/* Right Panel Layout Fix overrides */
+
 #repoConnectionView .git-connect-card {
-    width: 100%; /* Spans evenly inside the 1fr column grid template setup */
+    width: 100%; 
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
@@ -936,7 +931,7 @@
     line-height: 1.5;
 }
 
-/* Header context steps styling */
+
 .wizard-step-title {
     display: flex;
     justify-content: space-between;

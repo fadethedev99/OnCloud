@@ -646,5 +646,41 @@
             emptyStateBox.style.display = 'block';
         });
     </script>
+
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyCyi3ioxk8rhvtadngX8cXgCDMkWB3BClY",
+        authDomain: "oncloud-f6f30.firebaseapp.com",
+        projectId: "oncloud-f6f30",
+        storageBucket: "oncloud-f6f30.firebasestorage.app",
+        messagingSenderId: "1051051244925",
+        appId: "1:1051051244925:web:45f70f5f7272bf54a56014"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const urlParams = new URLSearchParams(window.location.search);
+    const serverToken = urlParams.get('token');
+
+    if (serverToken) {
+        auth.signInWithCustomToken(serverToken)
+            .then(() => {
+                window.history.replaceState({}, document.title, "/dashboard");
+                console.log("Logged in successfully using secure server pipeline!");
+            })
+            .catch(err => console.error("Session token activation failed:", err));
+    }
+
+    
+    auth.onAuthStateChanged(user => {
+        if (!user && !serverToken) {
+            window.location.href = "index.html";
+        }
+    });
+</script>
+
+
 </body>
 </html>

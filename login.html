@@ -78,7 +78,6 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
-       
         auth.onAuthStateChanged(user => {
             if (user) window.location.href = "dashboard.html";
         });
@@ -93,6 +92,7 @@
         const authSubmitBtn = document.getElementById('authSubmitBtn');
         const toggleAuthMode = document.getElementById('toggleAuthMode');
         const resetPasswordLink = document.getElementById('resetPasswordLink');
+
         toggleAuthMode.addEventListener('click', (e) => {
             e.preventDefault();
             isSignUpMode = !isSignUpMode;
@@ -155,7 +155,6 @@
                 } else {
                     await auth.signInWithEmailAndPassword(emailValue, passwordValue);
                 }
-
             } catch (err) {
                 authSubmitBtn.disabled = false;
                 authSubmitBtn.textContent = isSignUpMode ? 'Sign up' : 'Sign in';
@@ -178,29 +177,17 @@
             }
         });
 
-        
         document.querySelectorAll('.oauth-btn').forEach(btn => {
             btn.addEventListener('click', async () => {
                 const text = btn.textContent.trim();
 
-                // GitHub
+                
                 if (text === 'GitHub') {
-                    try {
-                        const provider = new firebase.auth.GithubAuthProvider();
-                        await auth.signInWithPopup(provider);
-                    } catch (err) {
-                        if (err.code === 'auth/account-exists-with-different-credential') {
-                            showError("An account already exists with this email using a different sign-in method.");
-                        } else if (err.code === 'auth/popup-closed-by-user') {
-                            showError("Sign-in popup was closed. Please try again.");
-                        } else {
-                            showError(err.message);
-                        }
-                    }
+                    window.location.href = '/api/auth/github';
                     return;
                 }
 
-                // Google
+                
                 if (text === 'Google') {
                     try {
                         const provider = new firebase.auth.GoogleAuthProvider();
